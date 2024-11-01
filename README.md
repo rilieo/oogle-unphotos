@@ -189,28 +189,29 @@ Album Model:
 ## Research Topics
 
 - (6 points) Using a frontend framework - React
-  - React is a front-end framework for building user interfaces. React is widely used for its simplicity, flexibility, and efficiency in developing fast and responsive interfaces. Its component-based architecture promotes reusability, allowing developers to build and maintain large applications with less code duplication.
+  - React is a front-end framework for building user interfaces. React is widely used for its simplicity, flexibility, and efficiency in developing fast and responsive interfaces. React is known for its component-based architecture, allowing developers to build and maintain applications with less code duplication.
   - Candidate Modules or Solutions
     - Using TailwindCSS with React for styling
     - Implementing animation using libraries such as React Spring
   - Points of Research
-    - Maintaining state within a component or within the app
+    - Maintaining states within a component or within the app
     - Connecting with MongoDB
-- (2 points) Using TailwindCSS
-  - TailwindCSS is a utility-first CSS framework, important in rapidly building custom user interfaces. Developers can style components directly in HTML or JSX, promoting flexibility and design consistency.
-  - Candidate Modules or Solutions
-    - Defining custom themes and colors in the config file
-    - Using HeroIcons for free SVG images
-  - Points of Research
-    - The impact of Tailwind in design flexibility and speed
-    - How Tailwind minimizes CSS file sizes
 - (3 points) Using Vite
   - Vite is a local deployment server that leverages native ES modules to support fast start times and development experience. Unlike traditional bundlers, Vite only processes the parts of the code being worked on, making it highly efficient.
   - Candidate Modules or Solutions
     - ESLint for finding and fixing problems with code
   - Points of Research
-    - Comparing Vite with other bundlers, including Webpack
     - Integrating ESLint into workflow 
+    - Using Vite build to deploy to server
+    - Configuring Vite with React
+- (2 points) Using TailwindCSS
+  - TailwindCSS is a utility-first CSS framework, important in rapidly building custom user interfaces. Developers can style components directly in HTML or JSX, promoting flexibility and design consistency.
+  - Candidate Modules or Solutions
+    - Styling configurations such as defining custom themes and colors
+    - Using HeroIcons for free SVG images
+  - Points of Research
+    - Integrating Tailwind with React
+    - How to configure styles using `tailwind.config.js`
 
 11 points total out of 10 required points
 
