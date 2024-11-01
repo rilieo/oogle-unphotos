@@ -187,7 +187,7 @@ Album Model:
 ## Research Topics
 
 - (6 points) Using a frontend framework - React
-  - React is a front-end framework for building user interfaces. React is widely used for its simplicity, flexibility, and efficiency in developing fast and responsive interfaces. Its component-based architecture promotes reusability, allowing developers to build and maintain large applications with less code duplication
+  - React is a front-end framework for building user interfaces. React is widely used for its simplicity, flexibility, and efficiency in developing fast and responsive interfaces. Its component-based architecture promotes reusability, allowing developers to build and maintain large applications with less code duplication.
   - Candidate Modules or Solutions
     - Using TailwindCSS with React for styling
     - Implementing animation using libraries such as React Spring
