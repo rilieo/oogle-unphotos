@@ -2,9 +2,11 @@
 
 ## Overview
 
-Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photo into tiny scrambled pieces. You can no longer make out what your photo even was. 
+Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photos into tiny scrambled pieces. Instead of seeing all your photos, you see a bunch of tile puzzles that you now have to solve. So sad.
 
-Oogle Unphoto is a web app that stores the photos that you upload. The catch is that once the user's photos are uploaded to this photo storage app, their photos are cropped into a 3x3 grid of tiles, scrambling the tiles into a puzzle format. Users can register for an account, login to their account, and view the photos they uploaded. In order to restore the original state of their photo, they have to rearrange the tiles into the correct spot.
+Oogle Unphoto is a web app that stores the photos that you upload...but life isn't fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. To restore each photo to its original form, users must rearrange the tiles until every piece is in the correct spot.
+
+This app combines the convenience of photo storage with the fun of interactive puzzles, adding an element of challenge to simply viewing and organizing photos. Users who successfully reassemble their images can gain both the satisfaction of solving a puzzle and the reward of viewing their complete photo.
 
 ## Data Model
 
@@ -218,6 +220,6 @@ Album Model:
 
 ### Storing images in MongoDB
 1. [GridFS to Store Images](https://www.mongodb.com/docs/drivers/node/current/fundamentals/gridfs)
-2. [Convert to Base64 String](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript)
+2. [Convert Images to Base64 String](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript)
 <!-- 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this) -->
 
