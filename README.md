@@ -4,7 +4,7 @@
 
 Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photo into tiny scrambled pieces. You can no longer make out what your photo even was. 
 
-Oogle Unphoto is a web app that automatically crops each photo into a 3x3 grid of tiles, scrambling them into a puzzle format. Users can register for an account, login to their account, and view the photos they uploaded. In order to restore the original state of their photo, they have to rearrange the tiles into the correct spot.
+Oogle Unphoto is a web app that stores the photos that you upload. The catch is that once the user's photos are uploaded to this photo storage app, their photos are cropped into a 3x3 grid of tiles, scrambling the tiles into a puzzle format. Users can register for an account, login to their account, and view the photos they uploaded. In order to restore the original state of their photo, they have to rearrange the tiles into the correct spot.
 
 ## Data Model
 
@@ -12,8 +12,8 @@ The application will store users, original photos, albums, rearranged photos, an
 
 - users can store multiple photos (by embedding)
   - rearranged photos are generated randomly from original photos
-  - photos will be sorted based on user preference of a filter
-- users can create albums to store their photos in
+  - photos will be sorted based on a filter
+- users can create albums to organize and group their photos
 
 User Model:
 
@@ -99,7 +99,7 @@ Album Model:
 - Post Conditions:
   - The uploaded photo is saved in the database.
   - The user can see the uploaded and rearranged photo in their library.
-- Special Requirements:
+- Exception Handling:
   - The system must verify that the uploaded photo does not exceed a size limit and the type of file uploaded is supported.
 
 ### Use Case 2: Playing Tile Puzzle
@@ -116,13 +116,15 @@ Album Model:
     - The user selects a photo they wish to play as a tile puzzle from their gallery.
     - Upon selection, the system opens a new interface dedicated to the tile puzzle, displaying the photo scrambled into a 3x3 grid of tiles.
     - The system provides a brief set of instructions on how to play the puzzle, including controls for tile movement (e.g., clicking tiles).
-    - The user interacts with the puzzle by moving tiles around, aiming to rearrange them into the correct order to form the original image.
+    - The user interacts with the puzzle by clicking 2 tiles at a time, aiming to rearrange them into the correct order to form the original image.
     - Once the user rearranges the tiles correctly, the system detects that the puzzle is complete.
     - The system displays the original photo in full view, providing visual confirmation of the completed puzzle.
     - The system displays the original photo in the library of photos when the user navigates back to `/photos`.
   - Alternative Flow:
-    - The puzzle fails to load.
-    - System provides an error message and prompt the user to reload the page or retry later.
+    - The user exits out of the instructions of the game.
+      - The system displays the current state of the photo.
+    - The user enters the puzzle phase, doesn't finish solving the puzzle, and exits.
+      - The system saves the current state and displays that state.
 - Post Conditions:
   - The user has successfully completed the tile puzzle and viewed the original photo.
   - The system records the user’s completion statistics (time and moves) if the user opts to save this data.
@@ -141,14 +143,15 @@ Album Model:
     - The system displays available sorting options, which may include:
       - Most Recent First: Displays the latest uploaded photos at the top.
       - Most Recent Last: Displays the earliest uploaded photos at the top.
-      - Alphabetical Order: Sorts photos based on titles or tags in ascending or descending order.
-      - By Tags: Sorts photos by specific tags assigned to them.
     - The user selects their preferred sorting option from the available choices.
     - The system processes the user’s selection and reorders the photos according to the chosen filter.
     - The updated list of photos is displayed in the selected order.
   - Alternative Flow:
-    - The filter could not be applied for whatever reason.
-    - The system notifies the user via a visual message.
+    - The user changes the sorting option.
+      - The previous option was removed, and the new sorting option is applied.
+      - The system displays the photos in the new order.
+    - The user removes the current sorting option. 
+      - The system displays the photos in default order (newest first).
 - Post Conditions:
   - The photos are displayed in the chosen sorted order, making it easier for the user to find and manage their images.
   - The system retains the user’s sorting preferences for the next time they access their photo library.
@@ -167,14 +170,16 @@ Album Model:
     - The user clicks on the `create album` button.
     - The system prompts the user to enter details, including:
       - Album Name: A title for the album.
-      - Album Description: An optional description to provide context or themes for the album.
+      - Album Description: A description to provide context or themes for the album.
     - The user clicks on the button to select photos to add to the album.
     - The system displays the user’s uploaded photos.
     - The user selects photos to include in the album by clicking on each photo.
     - The user confirms their selection, and the system saves the new album with the specified photos and details.
     - The system displays a confirmation message that the album has been created successfully.
   - Alternate Flow
-    - After creating the album, the user can access it from the library and choose to add or remove photos, rename the album, or update its description.
+    - The user doesn't provide a description.
+      - The user is prompted to select photos to add to the album.
+      - Rest is same...
   - Post Conditions
     - The album is stored in the user’s library and is accessible from the main album view.
     - The album appears in the user’s library with the selected photos organized within it.
@@ -211,6 +216,8 @@ Album Model:
 
 ## Annotations / References Used
 
+### Storing images in MongoDB
 1. [GridFS to Store Images](https://www.mongodb.com/docs/drivers/node/current/fundamentals/gridfs)
+2. [Convert to Base64 String](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript)
 <!-- 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this) -->
 
