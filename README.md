@@ -1,117 +1,216 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# Oogle Unphoto
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
+Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photo into tiny scrambled pieces. You can no longer make out what your photo even was. 
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
+Oogle Unphoto is a web app that automatically crops each photo into a 3x3 grid of tiles, scrambling them into a puzzle format. Users can register for an account, login to their account, and view the photos they uploaded. In order to restore the original state of their photo, they have to rearrange the tiles into the correct spot.
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
+The application will store users, original photos, albums, rearranged photos, and user preferences for sorting photos
 
-The application will store Users, Lists and Items
+- users can store multiple photos (by embedding)
+  - rearranged photos are generated randomly from original photos
+  - photos will be sorted based on user preference of a filter
+- users can create albums to store their photos in
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(__TODO__: sample documents)
-
-An Example User:
+User Model:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: // username
   hash: // a password hash,
-  lists: // an array of references to List documents
+  photos: [ // an array of photos that the user has uploaded
+    ...
+  ],
+  rearrangedPhotos: [
+    ...
+  ]
 }
 ```
 
-An Example List with Embedded Items:
-
+Album Model:
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+  name: // album name
+  photos: { // photos in album
+    ...
+  }
 }
 ```
 
-
-## [Link to Commented First Draft Schema](db.mjs) 
-
-(__TODO__: create a first draft of your Schemas in db.mjs and link to it)
+## [First Draft Schema](db.js) 
 
 ## Wireframes
 
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
+/ - home page
 
-/list/create - page for creating a new shopping list
+![](documentation/home.jpg)
 
-![list create](documentation/list-create.png)
+/login - login page
 
-/list - page for showing all shopping lists
+![](documentation/login.jpg)
 
-![list](documentation/list.png)
+/signup - signup page
 
-/list/slug - page for showing specific shopping list
+![](documentation/signup.jpg)
 
-![list](documentation/list-slug.png)
+/albums - all albums
 
-## Site map
+![](documentation/albums.jpg)
 
-(__TODO__: draw out a site map that shows how pages are related to each other)
+/album/:id - create album
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![](documentation/createalbum.jpg)
 
-## User Stories or Use Cases
+/photos - all photos + upload modal
 
-(__TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://en.wikipedia.org/wiki/Use_case))
+![](documentation/photos.jpg)
 
-1. as non-registered user, I can register a new account with the site
-2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+## Site Map
+
+![](documentation/sitermap.jpg)
+
+## Use Cases
+
+### Use Case 1: Storing Photos
+- Description
+  - In this use case, users can upload custom photos with personalized tags and descriptions associated with the photos. The system takes these photos and their attributes and stores them in the database.
+- Rationale
+  - The user needs to store their photos because they want to store a backup of their photos in case their physical device is unable to recover its photos.
+- Preconditions: 
+  - The user must be registered and logged in to the service.
+  - The user has prepared photos to upload.
+- Flows:
+  - General Flow:
+    - The user selects the option to upload a photo within the app’s interface.
+    - The user picks a photo file from their device to upload.
+    - The user confirms the upload.
+    - The system checks the file format and size to ensure compatibility.
+    - The system stores the photo in the database, assigning it a unique identifier for easy retrieval.
+    - The system provides feedback to the user, confirming that the photo has been uploaded and stored successfully.
+    - The system rearranges the photo and displays it in the user's library of photos.
+  - Alternative Flow:
+    - The user uploads a file type that is unsupported i.e. not an image or exceeds a size limit.
+      - The system prompts the user to select another file.
+    - The user exits out of the upload modal
+      - The user returns to the view of all the photos.
+- Post Conditions:
+  - The uploaded photo is saved in the database.
+  - The user can see the uploaded and rearranged photo in their library.
+- Special Requirements:
+  - The system must verify that the uploaded photo does not exceed a size limit and the type of file uploaded is supported.
+
+### Use Case 2: Playing Tile Puzzle
+- Description:
+  - In this use case, users play a tile puzzle in order to restore their original photo. Once the tile puzzle is completed, the system displays the original photo that was initially uploaded. 
+- Rationale:
+  - The tile puzzle component provides a fun and interactive way to engage with their photos.
+- Preconditions:
+  - The user must be registered and logged in.
+  - The user has uploaded their photo and can see their reordered photo in the gallery.
+- Flows:
+  - General Flow:
+    - The user navigates to the photo gallery within the app to view their uploaded photos.
+    - The user selects a photo they wish to play as a tile puzzle from their gallery.
+    - Upon selection, the system opens a new interface dedicated to the tile puzzle, displaying the photo scrambled into a 3x3 grid of tiles.
+    - The system provides a brief set of instructions on how to play the puzzle, including controls for tile movement (e.g., clicking tiles).
+    - The user interacts with the puzzle by moving tiles around, aiming to rearrange them into the correct order to form the original image.
+    - Once the user rearranges the tiles correctly, the system detects that the puzzle is complete.
+    - The system displays the original photo in full view, providing visual confirmation of the completed puzzle.
+    - The system displays the original photo in the library of photos when the user navigates back to `/photos`.
+  - Alternative Flow:
+    - The puzzle fails to load.
+    - System provides an error message and prompt the user to reload the page or retry later.
+- Post Conditions:
+  - The user has successfully completed the tile puzzle and viewed the original photo.
+  - The system records the user’s completion statistics (time and moves) if the user opts to save this data.
+
+### Use Case 3: Sort Photos
+- Description: 
+  - In this use case, users can sort their uploaded photos based on the date they were uploaded (most recent first or last). The system displays the photos in the chosen order, enabling users to easily manage their images.
+- Rationale:
+  - If the user has a significant amount of photos and wants to see their oldest photos, they don't have to scroll all the way down to view them.
+- Preconditions:
+  - The user is registered and logged in.
+  - The user has uploaded at least one photo to their library.
+- Flows:
+  - General Flow:
+    - The user navigates to the photo library within the app to view their uploaded photos.
+    - The system displays available sorting options, which may include:
+      - Most Recent First: Displays the latest uploaded photos at the top.
+      - Most Recent Last: Displays the earliest uploaded photos at the top.
+      - Alphabetical Order: Sorts photos based on titles or tags in ascending or descending order.
+      - By Tags: Sorts photos by specific tags assigned to them.
+    - The user selects their preferred sorting option from the available choices.
+    - The system processes the user’s selection and reorders the photos according to the chosen filter.
+    - The updated list of photos is displayed in the selected order.
+  - Alternative Flow:
+    - The filter could not be applied for whatever reason.
+    - The system notifies the user via a visual message.
+- Post Conditions:
+  - The photos are displayed in the chosen sorted order, making it easier for the user to find and manage their images.
+  - The system retains the user’s sorting preferences for the next time they access their photo library.
+
+### Use Case 4: Create Album
+- Description: 
+  - In this use case, users can organize and group their photos into albums. The system allows users to name the album and select multiple photos to include. Once created, the album is stored in the user’s library and can be accessed and edited at any time.
+- Rationale:
+  - The user wants to organize their photos.
+- Preconditions
+  - The user is registered and logged in.
+  - The user has uploaded photos to their library.
+- Flows
+  - General Flow
+    - The user navigates to the album page.
+    - The user clicks on the `create album` button.
+    - The system prompts the user to enter details, including:
+      - Album Name: A title for the album.
+      - Album Description: An optional description to provide context or themes for the album.
+    - The user clicks on the button to select photos to add to the album.
+    - The system displays the user’s uploaded photos.
+    - The user selects photos to include in the album by clicking on each photo.
+    - The user confirms their selection, and the system saves the new album with the specified photos and details.
+    - The system displays a confirmation message that the album has been created successfully.
+  - Alternate Flow
+    - After creating the album, the user can access it from the library and choose to add or remove photos, rename the album, or update its description.
+  - Post Conditions
+    - The album is stored in the user’s library and is accessible from the main album view.
+    - The album appears in the user’s library with the selected photos organized within it.
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
+- (6 points) Using a frontend framework - React
+  - React is a front-end framework for building user interfaces. React is widely used for its simplicity, flexibility, and efficiency in developing fast and responsive interfaces. Its component-based architecture promotes reusability, allowing developers to build and maintain large applications with less code duplication
+  - Candidate Modules or Solutions
+    - Using TailwindCSS with React for styling
+    - Implementing animation using libraries such as React Spring
+  - Points of Research
+    - Maintaining state within a component or within the app
+    - Connecting with MongoDB
+- (2 points) Using TailwindCSS
+  - TailwindCSS is a utility-first CSS framework, important in rapidly building custom user interfaces. Developers can style components directly in HTML or JSX, promoting flexibility and design consistency.
+  - Candidate Modules or Solutions
+    - Defining custom themes and colors in the config file
+    - Using HeroIcons for free SVG images
+  - Points of Research
+    - The impact of Tailwind in design flexibility and speed
+    - How Tailwind minimizes CSS file sizes
+- (3 points) Using Vite
+  - Vite is a local deployment server that leverages native ES modules to support fast start times and development experience. Unlike traditional bundlers, Vite only processes the parts of the code being worked on, making it highly efficient.
+  - Candidate Modules or Solutions
+    - ESLint for finding and fixing problems with code
+  - Points of Research
+    - Comparing Vite with other bundlers, including Webpack
+    - Integrating ESLint into workflow 
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+11 points total out of 10 required points
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit)
-
-
-## [Link to Initial Main Project File](app.mjs) 
-
-(__TODO__: create a skeleton Express application with a package.json, app.mjs, views folder, etc. ... and link to your initial app.mjs)
+## [Initial Main Project File](app.js) 
 
 ## Annotations / References Used
 
-(__TODO__: list any tutorials/references/etc. that you've based your code off of)
-
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+1. [GridFS to Store Images](https://www.mongodb.com/docs/drivers/node/current/fundamentals/gridfs)
+<!-- 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this) -->
 
