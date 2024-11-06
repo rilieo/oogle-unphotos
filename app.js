@@ -1,3 +1,5 @@
+import './config.js';
+import './db.js';
 import express from 'express'
 import mongoose from 'mongoose';
 import path from 'path'
@@ -7,4 +9,4 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT ?? 3000);
