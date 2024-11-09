@@ -21,4 +21,5 @@ Once sign up is successful, the user should be redirect to `/photos`
 
 ## References 
 [Manage current user state](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/master/app/frontend/src/context/AuthContext.jsx)
+
 [Routes](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/master/app/frontend/src/App.jsx)
