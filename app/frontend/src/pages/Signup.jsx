@@ -11,6 +11,12 @@ const Signup = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+
+      if (!userInfo.username || !userInfo.password) {
+         alert('Please fill out all fields');
+         return;
+      }
+      
       try {
          const response = await fetch('/api/auth/signup', {
             method: 'POST',
@@ -27,11 +33,12 @@ const Signup = () => {
             return;
          }
 
-         setUser(data.username);
-         alert(`Sign up successful`);
+         setUser(data);
+         localStorage.setItem('user', JSON.stringify(data));
+         alert('Sign up successful');
 
       } catch(err) {
-         alert(err);
+         alert('Sign up failed');
       }
    }
 

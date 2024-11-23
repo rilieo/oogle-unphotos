@@ -7,10 +7,15 @@ const Login = () => {
       username: '',
       password: ''
    });
-   const { user } = useAuth();
+   const { setUser } = useAuth();
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      if (!userInfo.username || !userInfo.password) {
+         alert('Please fill out all fields');
+         return;
+      }
+
       try {
          const response = await fetch('/api/auth/login', {
             method: 'POST',
@@ -19,9 +24,22 @@ const Login = () => {
             },
             body: JSON.stringify(userInfo)
          });
-         console.log(response);
+         
+         const data = await response.json();
+
+         if (data.message) {
+            console.log(err);
+            alert('Login failed');
+            return;
+         }
+
+         setUser(data);
+         localStorage.setItem('user', JSON.stringify(data));
+         alert('Login successful');
+
       } catch(err) {
          console.log(err);
+         alert('Login failed');
       }
    }
 
