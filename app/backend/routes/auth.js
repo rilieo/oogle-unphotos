@@ -36,9 +36,28 @@ authRouter.post("/signup", async (req, res) => {
     res.status(200).json(savedUser);
 });
 
-authRouter.post("/login", (req, res) => {
+authRouter.post("/login", async (req, res) => {
     console.log("Logging in...");
-    console.log(req.body);
+    
+    const body = req.body;
+    const username = body.username;
+    const password = body.password;
+
+    const user = await User.find({ username: username });
+
+    if (user.length === 0) {
+        res.status(400).json({ message: "User not found" });
+        return;
+    }
+
+    const passwordMatch = bcrypt.compareSync(password, user[0].password);
+
+    if (!passwordMatch) {
+        res.status(400).json({ message: "Invalid password" });
+        return;
+    }
+
+    res.status(200).json(user[0]);
 });
 
 export { authRouter };
