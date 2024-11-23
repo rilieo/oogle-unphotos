@@ -59,14 +59,14 @@ export default Upload
 
 /* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
 const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result)
-      };
-      fileReader.onerror = (error) => {
-        reject(error)
-    }
-  })
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    };
+    fileReader.onerror = (error) => {
+      reject(error)
+  }
+})
 }
