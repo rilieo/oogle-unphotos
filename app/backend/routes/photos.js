@@ -8,13 +8,12 @@ const getPhotos = async (user) => {
     const savedPhotos = [];
     for (let i = 0; i < user.photos.length; i++) {
         const photo = await Photo.findById(user.photos[i]);
-        savedPhotos.push(photo.image);
+        savedPhotos.push(photo);
     }
     return savedPhotos;
 }
 
 photosRouter.get("/", async (req, res) => {
-    console.log("Getting photos...");
     const user = req.query.user;
     const findUser = await User.find({ username: user });
     const currUser = findUser[0];
@@ -30,7 +29,6 @@ photosRouter.get("/", async (req, res) => {
 });
 
 photosRouter.post("/upload", async (req, res) => {
-    console.log("Uploading photo...");
     const body = req.body;
     const file = body.file;
     const userToUpdate = body.user;
