@@ -10,8 +10,8 @@ const Upload = ({ show, setPhotos }) => {
   }
 
   const handleSubmit = async (e) => {
-    show(prev => !prev);
     e.preventDefault();
+    show(prev => !prev);
 
     try {
       const response = await fetch('/api/photos/upload', {
@@ -38,6 +38,8 @@ const Upload = ({ show, setPhotos }) => {
 
   const handleUpload = async (e) => {
       const file = e.target.files[0];
+      if (!file) return;
+
       const base64 = await convertToBase64(file);
       setPhoto(base64);
   }

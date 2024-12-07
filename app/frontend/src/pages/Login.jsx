@@ -28,7 +28,6 @@ const Login = () => {
          const data = await response.json();
 
          if (data.message) {
-            console.log(err);
             alert('Login failed');
             return;
          }
@@ -53,8 +52,8 @@ const Login = () => {
                <input type="submit" value="Login" className="h-[50px] bottom-2 bg-blue-500 text-white font-bold cursor-pointer w-full mt-10 hover:bg-blue-600"/>
          </form>
          <p className="absolute bottom-2 right-2">Don't have an account? <Link to="/signup" className="text-blue-700 underline hover:cursor-pointer">Sign up</Link></p>
+         </div>
       </div>
-    </div>
    )};
 
 export default Login

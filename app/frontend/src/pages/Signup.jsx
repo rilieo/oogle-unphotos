@@ -38,6 +38,7 @@ const Signup = () => {
          alert('Sign up successful');
 
       } catch(err) {
+         console.error(err);
          alert('Sign up failed');
       }
    }
