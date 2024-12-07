@@ -16,6 +16,16 @@ authRouter.post("/signup", async (req, res) => {
         return;
     }
 
+    if (!username || !password) {
+        res.status(400).json({ message: "Please fill out all fields" });
+        return;
+    }
+
+    if (password.length < 6) {
+        res.status(400).json({ message: "Password must be at least 6 characters" });
+        return;
+    }
+
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
