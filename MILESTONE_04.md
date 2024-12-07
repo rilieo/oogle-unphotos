@@ -60,9 +60,9 @@ Second map function - This map functions transforms each tile represented as typ
 Link to github line number(s) for schemas (db.js or models folder)
 ---
 
-[Photo Schema](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/67ddfbfe9f18defbc14f7beec1268bc059a5315d/app/frontend/src/pages/Photos.jsx#L53)
+[Photo Schema](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/eb478fe81399922b64655d9adc140f31053284d7/app/backend/schemas/photo.js#L3)
 
-[User Schema](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/67ddfbfe9f18defbc14f7beec1268bc059a5315d/app/frontend/src/components/Board.jsx#L68)
+[User Schema](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/eb478fe81399922b64655d9adc140f31053284d7/app/backend/schemas/user.js#L3)
 
 Description of research topics above with points
 ---
