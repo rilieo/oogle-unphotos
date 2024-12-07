@@ -1,12 +1,11 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
 
 const Home = () => {
   return (
     <div className="flex flex-col items-center">
-        <Navbar />
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

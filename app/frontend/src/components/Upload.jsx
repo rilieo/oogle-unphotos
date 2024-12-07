@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Upload = ({ show, setPhotos }) => {
   const { user } = useAuth();
   const [photo, setPhoto] = useState('');
 
   const handleShow = () => {
-      show(prev => !prev);
-  }
+    show(prev => !prev);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Upload = ({ show, setPhotos }) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ user: user.username, file: photo })
-      })
+      });
 
       const data = await response.json();
       
@@ -32,17 +32,17 @@ const Upload = ({ show, setPhotos }) => {
       setPhotos(data.photos);
     }
     catch(err) {
-      alert(err)
+      alert(err);
     }
-  }
+  };
 
   const handleUpload = async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
 
-      const base64 = await convertToBase64(file);
-      setPhoto(base64);
-  }
+    const base64 = await convertToBase64(file);
+    setPhoto(base64);
+  };
 
   return (
     <div className="absolute top-0 right-0 z-5 bg-white">
@@ -54,21 +54,21 @@ const Upload = ({ show, setPhotos }) => {
         <input type="submit" value="Upload" className="text-white text-lg bg-blue-500 h-[50px] hover:cursor-pointer"/>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Upload
+export default Upload;
 
 /* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
 const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result)
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
     };
-    fileReader.onerror = (error) => {
-      reject(error)
-  }
-})
-}
+  });
+};

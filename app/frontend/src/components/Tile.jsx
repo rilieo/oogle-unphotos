@@ -16,7 +16,7 @@ const Tile = ({ index, img, handleClick, highlight }) => {
 
   const handleTileClick = () => {
     handleClick(index);
-  }
+  };
 
   return (
     <li style={tileStyle} onClick={handleTileClick}></li>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { TILE_COUNT } from '../constants';
 import Tile from './Tile';
 
@@ -15,7 +15,7 @@ const Board = ({ img }) => {
 
     return () => {
       setShuffle(false);
-    }
+    };
   });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Board = ({ img }) => {
   const shuffleTiles = () => {
     const shuffledTiles = [...tiles].sort(() => Math.random() - 0.5);
     setTiles(shuffledTiles);
-  }
+  };
 
   const swapTiles = () => {
     const [firstTile, secondTile] = clickedTiles;
@@ -55,7 +55,7 @@ const Board = ({ img }) => {
     }
 
     return true;
-  }
+  };
 
   const handleTileClick = (index) => {
     if (clickedTiles.length === 2) {
@@ -63,7 +63,7 @@ const Board = ({ img }) => {
     }
 
     setClickedTiles((prev) => [...prev, index]);
-  }
+  };
 
   const tileComponents = tiles.map((tile, index) => (
     <Tile
