@@ -1,5 +1,5 @@
 const Photo = ({ index, photo, handleClick }) => {
-
+  
   const handlePhotoClick = (e) => {
     e.preventDefault();
     handleClick(photo);

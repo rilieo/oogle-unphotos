@@ -51,7 +51,7 @@ const Upload = ({ show, setPhotos }) => {
         <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>
         <br/>
         <br/>
-        <input type="submit" value="Upload" className="text-white text-lg bg-blue-500 h-[50px] hover:cursor-pointer"/>
+        <input type="submit" value="Upload" className="text-white text-lg bg-primary h-[50px] hover:cursor-pointer"/>
       </form>
     </div>
   );

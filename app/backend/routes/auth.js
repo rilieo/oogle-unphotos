@@ -5,7 +5,6 @@ import User from "../schemas/user.js";
 const authRouter = express.Router();
 
 authRouter.post("/signup", async (req, res) => {
-    console.log("Signing up...");
     const body = req.body;
     const username = body.username;
     const password = body.password;
@@ -17,7 +16,6 @@ authRouter.post("/signup", async (req, res) => {
         return;
     }
 
-    console.log("Creating user...");
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -37,8 +35,6 @@ authRouter.post("/signup", async (req, res) => {
 });
 
 authRouter.post("/login", async (req, res) => {
-    console.log("Logging in...");
-    
     const body = req.body;
     const username = body.username;
     const password = body.password;

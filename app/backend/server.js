@@ -1,13 +1,12 @@
 import { config } from 'dotenv';
 config();
-import { albumRouter } from './routes/albums.js';
 import { authRouter } from './routes/auth.js';
 import { photosRouter } from './routes/photos.js';
 import cors from 'cors';
 import express from 'express'
 import mongoose from 'mongoose';
 
-mongoose.connect(process.env.DSN)
+mongoose.connect(process.env.DSN);
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;

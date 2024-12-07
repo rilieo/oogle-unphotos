@@ -8,7 +8,11 @@ export default {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "rgb(59 130 246)",
+      }
+    },
   },
   plugins: [],
 }
