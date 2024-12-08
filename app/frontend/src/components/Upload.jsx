@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { API } from '../constants.js';
 
 const Upload = ({ show, setPhotos }) => {
   const { user } = useAuth();
@@ -14,7 +15,7 @@ const Upload = ({ show, setPhotos }) => {
     show(prev => !prev);
 
     try {
-      const response = await fetch('/api/photos/upload', {
+      const response = await fetch(`${API}/api/photos/upload`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
