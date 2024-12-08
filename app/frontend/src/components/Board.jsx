@@ -71,12 +71,12 @@ const Board = ({ img }) => {
       index={tile}
       img={img}
       handleClick={() => handleTileClick(index)}
-      highlight={clickedTiles.includes(index) && clickedTiles.length < 2}
+      highlight={clickedTiles.includes(index)}
     />
   ));
 
   return (
-    <div className="w-[400px] h-[360px]">
+    <div className={`${solved ? 'w-1/4 h-full' : 'w-[400px] h-[360px]'}`}>
       {!solved ? 
         <ul className={`relative ${!solved ? 'grid grid-cols-3' : 'flex justify-center items-center'}`}>
           {tileComponents}
