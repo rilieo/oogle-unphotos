@@ -11,11 +11,6 @@ authRouter.post("/signup", async (req, res) => {
 
     const findByUsername = await User.find({ username: username });
 
-    if (findByUsername.length > 0) {
-        res.status(400).json({ message: "Username already exists" });
-        return;
-    }
-
     if (!username || !password) {
         res.status(400).json({ message: "Please fill out all fields" });
         return;
@@ -23,6 +18,11 @@ authRouter.post("/signup", async (req, res) => {
 
     if (password.length < 6) {
         res.status(400).json({ message: "Password must be at least 6 characters" });
+        return;
+    }
+
+    if (findByUsername.length > 0) {
+        res.status(400).json({ message: "Username already exists" });
         return;
     }
 
@@ -48,6 +48,11 @@ authRouter.post("/login", async (req, res) => {
     const body = req.body;
     const username = body.username;
     const password = body.password;
+
+    if (!username || !password) {
+        res.status(400).json({ message: "Please fill out all fields" });
+        return;
+    }
 
     const user = await User.find({ username: username });
 

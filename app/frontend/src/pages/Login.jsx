@@ -29,6 +29,7 @@ const Login = () => {
 
       if (data.message) {
         alert('Login failed');
+        console.error(data.message);
         return;
       }
 

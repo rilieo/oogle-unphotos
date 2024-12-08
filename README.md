@@ -2,9 +2,9 @@
 
 ## Overview
 
-Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photos into tiny scrambled pieces. Instead of seeing all your photos, you see a bunch of tile puzzles that you now have to solve. So sad.
+Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photos into tiny scrambled pieces. Instead of seeing your photos, you see a bunch of tile puzzles that you now have to solve. So sad.
 
-Oogle Unphoto is a web app that stores the photos that you upload...but life isn't fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. However, if you wanted to view a "full screen" photo that is uploaded, you would have to complete the puzzle :(
+Oogle Unphoto is a web app that stores the photos that you upload...but life isn't fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. However, if you wanted to view your photo full screen, you would have to complete the puzzle :(
 
 This app combines the convenience of photo storage with the fun of interactive puzzles, adding an element of challenge to simply viewing and organizing photos. Users who successfully reassemble their images can gain both the satisfaction of solving a puzzle and the reward of viewing their complete photo.
 
@@ -19,7 +19,7 @@ User Model:
 ```javascript
 {
   username: // username
-  hash: // a password hash,
+  password: // a password hash,
   photos: [ // an array of photos that the user has uploaded
     ...
   ],
@@ -61,7 +61,7 @@ Photo Model:
 
 ### Use Case 1: Storing Photos
 - Description
-  - In this use case, users can upload custom photos with personalized tags and descriptions associated with the photos. The system takes these photos and their attributes and stores them in the database.
+  - In this use case, users can upload custom photoss. The system takes these photos and their attributes and stores them in the database.
 - Rationale
   - The user needs to store their photos because they want to store a backup of their photos in case their physical device is unable to recover its photos.
 - Preconditions: 
@@ -75,7 +75,7 @@ Photo Model:
     - The system stores the photo in the database, assigning it a unique identifier for easy retrieval.
     - The system provides feedback to the user through visual confirmation.
   - Alternative Flow:
-    - The user uploads a file type that is unsupported i.e. not an image or exceeds a size limit.
+    - The user uploads a file type that is unsupported i.e. exceeds a size limit.
       - The system prompts the user to select another file.
     - The user exits out of the upload modal
       - The user returns to the view of all the photos.
@@ -83,7 +83,7 @@ Photo Model:
   - The uploaded photo is saved in the database.
   - The user can see the uploaded photo in their library.
 - Exception Handling:
-  - The system must verify that the uploaded photo does not exceed a size limit and the type of file uploaded is supported.
+  - The system must verify that the uploaded photo does not exceed a size limit and the type of file is supported.
 
 ### Use Case 2: Playing Tile Puzzle
 - Description:
@@ -139,9 +139,9 @@ Photo Model:
 ## [Initial Main Project File](app.js) 
 
 ## Annotations / References Used
+See source code
 
 ### Storing images in MongoDB
 1. [GridFS to Store Images](https://www.mongodb.com/docs/drivers/node/current/fundamentals/gridfs)
 2. [Convert Images to Base64 String](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript)
-<!-- 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this) -->
 

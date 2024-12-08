@@ -30,6 +30,7 @@ const Signup = () => {
 			
 			if (data.message) {
 				alert(data.message);
+				console.error(data.message);
 				return;
 			}
 
@@ -38,8 +39,8 @@ const Signup = () => {
 			alert('Sign up successful');
 
 		} catch(err) {
-			console.error(err);
 			alert('Sign up failed');
+			console.error(err);
 		}
 	};
 

@@ -39,6 +39,10 @@ const Upload = ({ show, setPhotos }) => {
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (file.size > 16000000) {
+      alert('File size is too large. Please upload a file less than 16MB.');
+      return;
+    }
 
     const base64 = await convertToBase64(file);
     setPhoto(base64);

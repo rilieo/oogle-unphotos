@@ -38,6 +38,11 @@ photosRouter.post("/upload", async (req, res) => {
         return;
     }
 
+    if (!file.includes("data:image")) {
+        res.status(400).json({ message: "Invalid file type" });
+        return;
+    }
+
     const findUser = await User.find({ username: userToUpdate });
     const currUser = findUser[0];
 

@@ -69,7 +69,7 @@ Description of research topics above with points
 
 (2 points) - Integrated ESLint into Vite
 
-(2 points) - Use TailwindCSS
+(2 points) - Use TailwindCSS for some customization
 
 (3 points) - Used Vite for development
 
@@ -88,10 +88,6 @@ Links to github line number(s) for research topics described above (one link per
 - [Vite](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/master/app/frontend/vite.config.js)
 
 - [React](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-rilieo/blob/master/app/frontend/src/App.jsx)
-
-Optional project notes 
---- 
-(TODO: optional add add any other information required for using/testing the final project)
 
 Attributions
 --- 
