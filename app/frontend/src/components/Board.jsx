@@ -71,7 +71,7 @@ const Board = ({ img }) => {
       index={tile}
       img={img}
       handleClick={() => handleTileClick(index)}
-      highlight={clickedTiles.includes(index)}
+      highlight={clickedTiles.includes(index) && clickedTiles.length < 2}
     />
   ));
 
