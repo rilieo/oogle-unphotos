@@ -4,6 +4,7 @@ import Board from '../components/Board';
 import Photo from '../components/Photo';
 import Upload from '../components/Upload';
 import { useAuth } from '../context/AuthContext';
+import { API } from '../constants.js';
 
 const Photos = () => {
   const [showUpload, setShowUpload] = useState(false);
@@ -15,7 +16,7 @@ const Photos = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch(`/api/photos?user=${user.username}`);
+        const response = await fetch(`${API}/api/photos?user=${user.username}`);
         const data = await response.json();
         
         if (data.message) {
