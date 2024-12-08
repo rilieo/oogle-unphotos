@@ -33,7 +33,7 @@ URL for form 2 (for previous milestone)
 
 Special Instructions for Form 2
 ---
-Click on the `upload` icon in top right. Photos take a while to load...
+Click on the `upload` icon in top right. Photos take a while to load...If they don't load, try refreshing?
 
 URL for form 3 (from current milestone) 
 ---
