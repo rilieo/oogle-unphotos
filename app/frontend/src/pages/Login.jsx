@@ -39,7 +39,7 @@ const Login = () => {
 
     } catch(err) {
       console.log(err);
-      alert('Login failed');
+      alert('Login failed', err);
     }
   };
 

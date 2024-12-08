@@ -9,8 +9,6 @@ authRouter.post("/signup", async (req, res) => {
     const username = body.username;
     const password = body.password;
 
-    const findByUsername = await User.find({ username: username });
-
     if (!username || !password) {
         res.status(400).json({ message: "Please fill out all fields" });
         return;
@@ -20,6 +18,8 @@ authRouter.post("/signup", async (req, res) => {
         res.status(400).json({ message: "Password must be at least 6 characters" });
         return;
     }
+
+    const findByUsername = await User.find({ username: username });
 
     if (findByUsername.length > 0) {
         res.status(400).json({ message: "Username already exists" });

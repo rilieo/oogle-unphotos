@@ -39,7 +39,7 @@ const Signup = () => {
 			alert('Sign up successful');
 
 		} catch(err) {
-			alert('Sign up failed');
+			alert('Sign up failed', err);
 			console.error(err);
 		}
 	};
