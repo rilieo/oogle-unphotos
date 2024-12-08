@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API } from '../constants.js';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({
@@ -17,7 +18,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(`${API}/api/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

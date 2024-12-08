@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API } from '../constants.js';
 
 const Signup = () => {
 	const [userInfo, setUserInfo] = useState({
@@ -18,7 +19,7 @@ const Signup = () => {
 		}
 		
 		try {
-			const response = await fetch('/api/auth/signup', {
+			const response = await fetch(`${API}/api/auth/signup`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -26,7 +27,9 @@ const Signup = () => {
 				body: JSON.stringify(userInfo)
 			});
 
+			console.log(response);
 			const data = await response.json();
+			console.log(data);
 			
 			if (data.message) {
 				alert(data.message);
