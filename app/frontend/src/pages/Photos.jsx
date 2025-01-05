@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import { API } from '../constants.js';
 
 const Photos = () => {
-  const [showUpload, setShowUpload] = useState(false);
+  const [show, setShow] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
   const [puzzlePhoto, setPuzzlePhoto] = useState('');
   const [photos, setPhotos] = useState([]);
@@ -34,11 +34,10 @@ const Photos = () => {
     };
 
     fetchPhotos();
-  });
+  }, [photos, user.username]);
 
-  const handleUpload = (e) => {
-    e.preventDefault();
-    setShowUpload(prev => !prev);
+  const handleUpload = () => {
+    setShow(prev => !prev);
   };
 
   const handleClick = (photo) => {
@@ -61,7 +60,7 @@ const Photos = () => {
     <>
       <nav className="flex justify-between items-center h-[50px]">
         <h2 className="font-bold text-3xl">Oogle Unphotos</h2>
-        {showUpload ? <Upload show={setShowUpload} setPhotos={setPhotos} /> :
+        { show ? <Upload setShow={setShow} /> : <span/>}
         <div className="flex justify-center items-center space-x-5 font-bold">
           <button onClick={handleUpload}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -72,7 +71,6 @@ const Photos = () => {
             <Link to="/">Log out</Link>
           </button> 
         </div>
-        }
       </nav>
       <div className={`flex ${!showBoard ? 'flex-wrap justify-start items-center gap-10' : 'justify-center items-center'} mt-10`}>
         {showBoard ? <Board img={puzzlePhoto} /> : 

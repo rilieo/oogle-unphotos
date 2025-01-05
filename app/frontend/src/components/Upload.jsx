@@ -2,17 +2,31 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { API } from '../constants.js';
 
-const Upload = ({ show, setPhotos }) => {
+const Upload = ({ setShow }) => {
   const { user } = useAuth();
   const [photo, setPhoto] = useState('');
 
+  /* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
+  const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+          reject(error);
+      };
+    });
+  };
+
   const handleShow = () => {
-    show(prev => !prev);
+    setShow(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    show(prev => !prev);
+    setShow(false);
 
     try {
       const response = await fetch(`${API}/api/photos/upload`, {
@@ -29,8 +43,6 @@ const Upload = ({ show, setPhotos }) => {
         alert(data.message);
         return;
       }
-
-      setPhotos(data.photos);
     }
     catch(err) {
       alert(err);
@@ -63,17 +75,3 @@ const Upload = ({ show, setPhotos }) => {
 };
 
 export default Upload;
-
-/* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
-const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-    };
-  });
-};
