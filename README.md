@@ -1,5 +1,11 @@
 # Oogle Unphoto
 
+## Tech
+- React
+- JavaScript
+- Express
+- MongoDB
+
 ## Overview
 
 Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photos into tiny scrambled pieces. Instead of seeing your photos, you see a bunch of tile puzzles that you now have to solve. So sad.
