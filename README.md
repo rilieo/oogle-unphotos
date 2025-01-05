@@ -147,6 +147,9 @@ Photo Model:
 ## Annotations / References Used
 See source code
 
+Icons
+<a target="_blank" href="https://icons8.com/icon/14090/upload">Upload</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
 ### Storing images in MongoDB
 1. [GridFS to Store Images](https://www.mongodb.com/docs/drivers/node/current/fundamentals/gridfs)
 2. [Convert Images to Base64 String](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript)
