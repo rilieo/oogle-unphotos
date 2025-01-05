@@ -4,9 +4,9 @@
 
 Oh no! Unfortunately, the photo storage service that you downloaded from the dark web, Oogle Unphoto, just broke up your uploaded photos into tiny scrambled pieces. Instead of seeing your photos, you see a bunch of tile puzzles that you now have to solve. So sad.
 
-Oogle Unphoto is a web app that stores the photos that you upload...but life isn't fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. However, if you wanted to view your photo full screen, you would have to complete the puzzle :(
+Oogle Unphoto is a web app that stores the photos that you upload...but life isn't always fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. However, if you wanted to view your photo in full screen and in its full glory, you would have to complete the puzzle :(
 
-This app combines the convenience of photo storage with the fun of interactive puzzles, adding an element of challenge to simply viewing and organizing photos. Users who successfully reassemble their images can gain both the satisfaction of solving a puzzle and the reward of viewing their complete photo.
+This app combines the convenience of photo storage with the fun of interactive puzzles, adding an element of challenge to viewing and organizing photos. Users who successfully reassemble their images can gain both the satisfaction of solving a puzzle and the reward of viewing their complete photo.
 
 ## Data Model
 
