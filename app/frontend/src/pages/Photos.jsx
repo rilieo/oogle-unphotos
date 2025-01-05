@@ -4,35 +4,50 @@ import Board from '../components/Board';
 import Photo from '../components/Photo';
 import Upload from '../components/Upload';
 import { useAuth } from '../context/AuthContext';
-import { fetchData, get} from '../lib/db.js';
+import { fetchData } from '../lib/db.js';
 import { photosRoute } from '../constants';
+import { upload } from '../assets';
 
 const Photos = () => {
   const [show, setShow] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
-  const [puzzlePhoto, setPuzzlePhoto] = useState('');
+  const [selected, setSelected] = useState(null);
   const [photos, setPhotos] = useState([]);
   const { user, setUser } = useAuth();
 
+  const fetchPhotos = async () => {
+    const data = await fetchData(photosRoute, `user=${user.username}`);
+  
+    if (!data) return;
+  
+    setPhotos(data.photos);
+  };
+
   useEffect(() => {
-    const fetchPhotos = async () => {
-      const data = await fetchData(() => get(photosRoute, `user=${user.username}`));
+    try {
+      fetchPhotos();
 
-      if (!data) return;
+    } catch (error) {
+      console.log(error);
+    }
 
-      setPhotos(data.photos);
-    };
+  }, []);
 
-    fetchPhotos();
-  }, [photos, user.username]);
-
-  const handleUpload = () => {
+  const showUpload = () => {
     setShow(prev => !prev);
   };
 
-  const handleClick = (photo) => {
-    setPuzzlePhoto(photo.image);
-    setShowBoard(prev => !prev);
+  const handleUpload = () => {
+    fetchPhotos();
+  };
+
+  const handlePhotoClick = (photo) => {
+    setSelected(photo.image);
+    setShowBoard(true);
+  };
+
+  const handleShowBoard = () => {
+    setShowBoard(false);
   };
 
   const logout = () => {
@@ -42,7 +57,7 @@ const Photos = () => {
 
   const photoComponents = photos && photos.map((photo, index) => {
     return (
-      <Photo key={index} index={index} photo={photo} handleClick={handleClick} />
+      <Photo key={index} index={index} photo={photo} handleClick={handlePhotoClick} />
     );
   });
 
@@ -50,21 +65,20 @@ const Photos = () => {
     <>
       <nav className="flex justify-between items-center h-[50px]">
         <h2 className="font-bold text-3xl">Oogle Unphotos</h2>
-        { show ? <Upload user={user} setShow={setShow} /> : <span/>}
+        <Upload user={user} show={show} setShow={setShow} refetch={handleUpload}/>
         <div className="flex justify-center items-center space-x-5 font-bold">
-          <button onClick={handleUpload}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-            </svg>
+          <button onClick={showUpload}>
+            <img src={upload} alt="upload icon" />
           </button>
           <button className="border mr-2 py-2 w-[80px] rounded bg-primary hover:bg-blue-600 text-white hover:cursor-pointer" onClick={logout}>
             <Link to="/">Log out</Link>
           </button> 
         </div>
       </nav>
-      <div className={`flex ${!showBoard ? 'flex-wrap justify-start items-center gap-10' : 'justify-center items-center'} mt-10`}>
-        {showBoard ? <Board img={puzzlePhoto} /> : 
-          photoComponents && photoComponents.length > 0 ? photoComponents : <h1 className="text-xl">No Photos Found</h1>
+      <div className={`flex ${!showBoard ? 'flex-wrap justify-start items-center gap-10' : 'justify-center items-center min-h-[70vh]'} mt-10`}>
+        <Board photo={selected} showBoard={showBoard} setShowBoard={handleShowBoard} />
+        {
+          !showBoard && photoComponents
         }
       </div>
     </>

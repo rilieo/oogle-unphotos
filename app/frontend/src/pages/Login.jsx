@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { fetchData, post} from '../lib/db.js';
+import { postData } from '../lib/db.js';
 import { loginRoute } from '../constants.js';
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
       return;
     }
 
-    const data = await fetchData(() => post(loginRoute, userInfo));
+    const data = await postData(loginRoute, userInfo);
 
     if (!data) return;
     

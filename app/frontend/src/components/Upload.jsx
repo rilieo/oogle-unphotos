@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { uploadRoute } from '../constants.js';
-import { fetchData, post } from '../lib/db.js';
+import { postData } from '../lib/db.js';
 
-const Upload = ({ user, setShow }) => {
+const Upload = ({ user, show, setShow, refetch }) => {
   const [photo, setPhoto] = useState('');
   const [uploading, setUploading] = useState(false);
 
@@ -28,12 +28,14 @@ const Upload = ({ user, setShow }) => {
     e.preventDefault();
 
     setUploading(true);
-    const data = await fetchData(() => post(uploadRoute, { user: user.username, file: photo}));
+    const data = await postData(uploadRoute, { user: user.username, file: photo });
 
     if (!data) return;
 
     setShow(false);
     setUploading(false);
+
+    refetch();
   };
 
   const handleUpload = async (e) => {
@@ -49,7 +51,7 @@ const Upload = ({ user, setShow }) => {
   };
 
   return (
-    <div className="absolute top-0 right-0 z-5 bg-white">
+    <div className={`${show ? 'block' : 'hidden'} absolute top-0 right-0 z-5 bg-white`}>
       <button className="absolute right-5 text-xl font-bold" onClick={handleShow}>x</button>
       <form className="flex flex-col shadow-md p-5" onSubmit={handleSubmit}>
         <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>

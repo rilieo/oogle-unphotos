@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signupRoute } from '../constants';
-import { fetchData, post } from '../lib/db';
+import { postData } from '../lib/db';
 
 const Signup = () => {
 	const [userInfo, setUserInfo] = useState({
@@ -19,7 +19,7 @@ const Signup = () => {
 			return;
 		}
 		
-    const data = await fetchData(() => post(signupRoute, userInfo));
+    const data = await postData(signupRoute, userInfo);
 
     if (!data) return;
 
