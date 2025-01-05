@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { TILE_COUNT } from '../constants';
 import Tile from './Tile';
+import { back } from '../assets';
 
-const Board = ({ img }) => {
+const Board = ({ photo, showBoard, setShowBoard }) => {
   const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
   const [shuffle, setShuffle] = useState(true);
   const [clickedTiles, setClickedTiles] = useState([]);
@@ -69,21 +70,25 @@ const Board = ({ img }) => {
     <Tile
       key={tile}
       index={tile}
-      img={img}
+      img={photo}
       handleClick={() => handleTileClick(index)}
       highlight={clickedTiles.includes(index)}
     />
   ));
 
   return (
-    <div className={`${solved ? 'w-1/4 h-full' : 'w-[400px] h-[360px]'}`}>
-      {!solved ? 
-        <ul className={`relative ${!solved ? 'grid grid-cols-3' : 'flex justify-center items-center'}`}>
-          {tileComponents}
-        </ul>
-        :
-        <img className="object-cover h-full w-full" src={img} alt="im"></img>
-      } 
+    <div className={`${showBoard ? 'block' : 'hidden'} h-full`}>
+      <button className="absolute top-20 left-5" onClick={setShowBoard}>
+        <img src={back} alt="back icon" className="w-10 h-10" />
+      </button>
+      <div className="flex justify-center items-center h-full">
+        <div className="h-[400px] w-[400px]">
+          <ul className={`relative ${!solved ? 'grid grid-cols-3' : 'hidden'}`}>
+            {tileComponents}
+          </ul>
+          <img className={`${!solved ? 'hidden' : 'object-cover h-full w-full'}`} src={photo} alt="puzzle"></img>
+        </div>
+      </div>
     </div>
   );
 };
