@@ -19,10 +19,13 @@ const Signup = () => {
 			return;
 		}
 		
-    const info = JSON.stringify(userInfo);
-    const fn = post(signupRoute, info);
-    const data = fetchData(fn);
+    const data = await fetchData(() => post(signupRoute, userInfo));
+
+    if (!data) return;
+
     setUser(data);
+    localStorage.setItem('user', JSON.stringify(data));
+    alert('Sign up successful');
 	};
 
   return (

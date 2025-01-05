@@ -18,10 +18,13 @@ const Login = () => {
       return;
     }
 
-    const info = JSON.stringify(userInfo);
-    const fn = post(loginRoute, info);
-    const data = fetchData(fn);
+    const data = await fetchData(() => post(loginRoute, userInfo));
+
+    if (!data) return;
+    
     setUser(data);
+    localStorage.setItem('user', JSON.stringify(data));
+    alert('Login successful');
   };
 
   return (

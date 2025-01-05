@@ -1,11 +1,11 @@
 import { API } from "../constants";
 
 export const get = async (route, searchParams) => {
-    fetch(`${API}/api/${route}?${searchParams}`);
+    return fetch(`${API}/api/${route}?${searchParams}`);
 };
 
 export const post = async (route, data) => {
-    fetch(`${API}/api/${route}`, {
+    return fetch(`${API}/api/${route}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -15,22 +15,21 @@ export const post = async (route, data) => {
 };
 
 export const fetchData = async (fn) => {
-  let data = [];
-
   try {
     const response = await fn();
-    const dataObj = await response.json();
+    const data = await response.json();
     
-    if (data.message) {
-      alert('Failed to fetch data');
-      console.error(data.message);
-      return;
+    if (data.length === 0) {
+      alert('No data found');
+      console.log( 'No data found');
+      return [];
     }
 
-    data = dataObj;
+    return data;
 
   } catch (error) {
+    alert(error);
     console.log(error);
-    console.error('Error fetching photos:', error);
+    return [];
   }
 };

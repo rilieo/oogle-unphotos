@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { API } from '../constants.js';
+import { uploadRoute } from '../constants.js';
+import { fetchData, post } from '../lib/db.js';
 
-const Upload = ({ setShow }) => {
-  const { user } = useAuth();
+const Upload = ({ user, setShow }) => {
   const [photo, setPhoto] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   /* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
   const convertToBase64 = (file) => {
@@ -26,27 +26,14 @@ const Upload = ({ setShow }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setUploading(true);
+    const data = await fetchData(() => post(uploadRoute, { user: user.username, file: photo}));
+
+    if (!data) return;
+
     setShow(false);
-
-    try {
-      const response = await fetch(`${API}/api/photos/upload`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user: user.username, file: photo })
-      });
-
-      const data = await response.json();
-      
-      if (data.message) {
-        alert(data.message);
-        return;
-      }
-    }
-    catch(err) {
-      alert(err);
-    }
+    setUploading(false);
   };
 
   const handleUpload = async (e) => {
@@ -67,6 +54,7 @@ const Upload = ({ setShow }) => {
       <form className="flex flex-col shadow-md p-5" onSubmit={handleSubmit}>
         <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>
         <br/>
+        <p className={`${uploading ? 'block' : 'hidden'} text-md`}>Uploading...</p>
         <br/>
         <input type="submit" value="Upload" className="text-white text-lg bg-primary h-[50px] hover:cursor-pointer"/>
       </form>

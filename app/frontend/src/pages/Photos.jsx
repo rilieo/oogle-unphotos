@@ -4,7 +4,8 @@ import Board from '../components/Board';
 import Photo from '../components/Photo';
 import Upload from '../components/Upload';
 import { useAuth } from '../context/AuthContext';
-import { API } from '../constants.js';
+import { fetchData, get} from '../lib/db.js';
+import { photosRoute } from '../constants';
 
 const Photos = () => {
   const [show, setShow] = useState(false);
@@ -15,22 +16,11 @@ const Photos = () => {
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      try {
-        const response = await fetch(`${API}/api/photos?user=${user.username}`);
-        const data = await response.json();
-        
-        if (data.message) {
-          alert('Failed to fetch photos');
-          console.error(data.message);
-          return;
-        }
+      const data = await fetchData(() => get(photosRoute, `user=${user.username}`));
 
-        setPhotos(data.photos);
+      if (!data) return;
 
-      } catch (error) {
-        console.log(error);
-        console.error('Error fetching photos:', error);
-      }
+      setPhotos(data.photos);
     };
 
     fetchPhotos();
@@ -50,7 +40,7 @@ const Photos = () => {
     localStorage.removeItem('user');
   };
 
-  const photoComponents = photos.map((photo, index) => {
+  const photoComponents = photos && photos.map((photo, index) => {
     return (
       <Photo key={index} index={index} photo={photo} handleClick={handleClick} />
     );
@@ -60,7 +50,7 @@ const Photos = () => {
     <>
       <nav className="flex justify-between items-center h-[50px]">
         <h2 className="font-bold text-3xl">Oogle Unphotos</h2>
-        { show ? <Upload setShow={setShow} /> : <span/>}
+        { show ? <Upload user={user} setShow={setShow} /> : <span/>}
         <div className="flex justify-center items-center space-x-5 font-bold">
           <button onClick={handleUpload}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -74,7 +64,7 @@ const Photos = () => {
       </nav>
       <div className={`flex ${!showBoard ? 'flex-wrap justify-start items-center gap-10' : 'justify-center items-center'} mt-10`}>
         {showBoard ? <Board img={puzzlePhoto} /> : 
-          photoComponents.length > 0 ? photoComponents : <span />
+          photoComponents && photoComponents.length > 0 ? photoComponents : <h1 className="text-xl">No Photos Found</h1>
         }
       </div>
     </>
