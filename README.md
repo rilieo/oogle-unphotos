@@ -1,10 +1,14 @@
 # Oogle Unphoto
 
-## Tech
-- React
-- JavaScript
-- Express
-- MongoDB
+## Table of Contents
+1. [Overview](#overview)
+2. [Tech](#tech)
+3. [Demo](#demo)
+4. [Data Model](#data-model)
+5. [Wireframes](#wireframes)
+6. [Sitemap](#site-map)
+7. [Use Cases](#use-cases)
+8. [Attributes](#attributes)
 
 ## Overview
 
@@ -13,6 +17,15 @@ Oh no! Unfortunately, the photo storage service that you downloaded from the dar
 Oogle Unphoto is a web app that stores the photos that you upload...but life isn't always fair. Once the user's photos are uploaded to this photo storage app, the photos are cropped into a 3x3 grid, scrambling the pieces into a tile puzzle. Like any other photo storage app, users can register for an account, login to their account, and view the photos they uploaded. However, if you wanted to view your photo in full screen and in its full glory, you would have to complete the puzzle :(
 
 This app combines the convenience of photo storage with the fun of interactive puzzles, adding an element of challenge to viewing and organizing photos. Users who successfully reassemble their images can gain both the satisfaction of solving a puzzle and the reward of viewing their complete photo.
+
+## Tech
+- React
+- JavaScript
+- Express
+- MongoDB
+
+# Demo
+[Link](https://imgur.com/a/nowEf3v)
 
 ## Data Model
 
@@ -144,7 +157,7 @@ Photo Model:
 
 ## [Initial Main Project File](app.js) 
 
-## Annotations / References Used
+## Attributes
 See source code
 
 Icons
