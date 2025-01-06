@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { postData } from '../../lib/db.js';
-import { loginRoute } from '../../constants.js';
+import { loginRoute } from '../../constants';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({

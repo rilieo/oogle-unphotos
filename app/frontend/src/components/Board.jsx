@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TILE_COUNT } from '../constants';
+import { TILE_COUNT } from '../../constants';
 import Tile from './Tile';
 import { back } from '../assets';
 

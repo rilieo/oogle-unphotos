@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { uploadRoute } from '../../constants.js';
+import { uploadRoute } from '../../constants';
 import { postData } from '../../lib/db.js';
 
 const Upload = ({ user, show, setShow, refetch }) => {

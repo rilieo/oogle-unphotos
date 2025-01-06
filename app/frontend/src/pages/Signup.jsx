@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { signupRoute } from '../constants';
+import { signupRoute } from '../../constants';
 import { postData } from '../../lib/db.js';
 
 const Signup = () => {
