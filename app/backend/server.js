@@ -12,7 +12,6 @@ const PORT = process.env.BACKEND_PORT ?? 3001;
 
 app.use(cors({
     origin: true,
-    methods: ['GET', 'POST'],
     credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
