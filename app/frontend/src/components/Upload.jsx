@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { uploadRoute } from '../../constants';
 import { postData } from '../../lib/db.js';
 
 const Upload = ({ user, show, setShow, refetch }) => {
   const [photo, setPhoto] = useState('');
+  const inputRef = useRef(null);
   const [uploading, setUploading] = useState(false);
 
   /* From https://github.com/akashyap2013/ImageToBase64/blob/master/react_app/src/App.jsx */
@@ -34,6 +35,8 @@ const Upload = ({ user, show, setShow, refetch }) => {
 
     setShow(false);
     setUploading(false);
+    setPhoto('');
+    inputRef.current.value = '';
 
     refetch();
   };
@@ -54,7 +57,7 @@ const Upload = ({ user, show, setShow, refetch }) => {
     <div className={`${show ? 'block' : 'hidden'} absolute top-0 right-0 z-5 bg-white`}>
       <button className="absolute right-5 text-xl font-bold" onClick={handleShow}>x</button>
       <form className="flex flex-col shadow-md p-5" onSubmit={handleSubmit}>
-        <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>
+        <input type="file" accept=".jpg, .jpeg, .png" ref={inputRef} onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>
         <br/>
         <p className={`${uploading ? 'block' : 'hidden'} text-md`}>Uploading...</p>
         <br/>

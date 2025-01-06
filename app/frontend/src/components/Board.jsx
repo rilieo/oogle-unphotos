@@ -81,7 +81,7 @@ const Board = ({ photo, showBoard, setShowBoard }) => {
       <button className="absolute top-20 left-5" onClick={setShowBoard}>
         <img src={back} alt="back icon" className="w-10 h-10" />
       </button>
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center w-full h-full">
         <div className="h-[400px] w-[400px]">
           <ul className={`relative ${!solved ? 'grid grid-cols-3' : 'hidden'}`}>
             {tileComponents}
