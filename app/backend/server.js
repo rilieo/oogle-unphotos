@@ -15,6 +15,12 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRouter);
 app.use('/api/photos', photosRouter);
 
+// app.get('/', (req, res) => {
+//     res.send('Hello World!');
+// });
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
+
+export default app;
