@@ -4,7 +4,7 @@ import Board from '../components/Board';
 import Photo from '../components/Photo';
 import Upload from '../components/Upload';
 import { useAuth } from '../context/AuthContext';
-import { fetchData } from '../lib/db.js';
+import { fetchData } from '../../lib/db.js';
 import { photosRoute } from '../constants';
 import { upload } from '../assets';
 
