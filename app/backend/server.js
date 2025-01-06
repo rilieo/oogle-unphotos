@@ -15,8 +15,8 @@ app.use(cors({
     credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
-app.use('/api/auth', authRouter);
-app.use('/api/photos', photosRouter);
+app.use('api/auth', authRouter);
+app.use('api/photos', photosRouter);
 
 // app.get('/', (req, res) => {
 //     res.send('Hello World!');
