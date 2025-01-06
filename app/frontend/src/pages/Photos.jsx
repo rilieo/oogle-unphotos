@@ -16,19 +16,13 @@ const Photos = () => {
   const fetchPhotos = async () => {
     const data = await fetchData(photosRoute, `user=${user.username}`);
   
-    if (!data) return;
+    if (data.length === 0) return;
   
     setPhotos(data.photos);
   };
 
   useEffect(() => {
-    try {
-      fetchPhotos();
-
-    } catch (error) {
-      console.log(error);
-    }
-
+    fetchPhotos();
   }, []);
 
   const showUpload = () => {

@@ -5,7 +5,12 @@ export const fetchData = async (route, searchParams) => {
     const response = await fetch(`${API}/api/${route}?${searchParams}`);
     const data = await response.json();
     
-    if (data.length === 0) {
+    if (data.message) {
+      alert(data.message);
+      console.log(data.message);
+      return [];
+    }
+    else if (data.length === 0) {
       alert('No data found');
       console.log( 'No data found');
       return [];
@@ -31,7 +36,12 @@ export const postData = async (route, data) => {
 
     const responseData = await response.json();
     
-    if (responseData.length === 0) {
+    if (responseData.message) {
+      alert(responseData.message);
+      console.log(responseData.message);
+      return [];
+    }
+    else if (responseData.length === 0) {
       alert('No data found');
       console.log('No data found');
       return [];

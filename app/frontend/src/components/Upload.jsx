@@ -31,7 +31,7 @@ const Upload = ({ user, show, setShow, refetch }) => {
     setUploading(true);
     const data = await postData(uploadRoute, { user: user.username, file: photo });
 
-    if (!data) return;
+    if (data.length === 0) return;
 
     setShow(false);
     setUploading(false);

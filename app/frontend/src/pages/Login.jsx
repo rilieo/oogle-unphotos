@@ -20,7 +20,7 @@ const Login = () => {
 
     const data = await postData(loginRoute, userInfo);
 
-    if (!data) return;
+		if (data.length === 0) return;
     
     setUser(data);
     localStorage.setItem('user', JSON.stringify(data));

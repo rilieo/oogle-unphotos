@@ -19,13 +19,13 @@ const Signup = () => {
 			return;
 		}
 		
-    const data = await postData(signupRoute, userInfo);
+		const data = await postData(signupRoute, userInfo);
 
-    if (!data) return;
+		if (data.length === 0) return;
 
-    setUser(data);
-    localStorage.setItem('user', JSON.stringify(data));
-    alert('Sign up successful');
+		setUser(data);
+		localStorage.setItem('user', JSON.stringify(data));
+		alert('Sign up successful');
 	};
 
   return (
