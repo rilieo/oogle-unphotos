@@ -11,8 +11,8 @@ const app = express();
 const PORT = process.env.BACKEND_PORT ?? 3001;
 
 app.use(cors({
-    origin: true,
-    credentials: true,
+    origin: 'https://oogle-unphotos-j55a.vercel.app',
+    methods: ['GET', 'POST']
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRouter);
