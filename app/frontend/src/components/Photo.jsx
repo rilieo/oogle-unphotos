@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Board from "./Board";
+import { usePuzzle } from "../context/PuzzleContext";
 
 const Photo = ({ index, photo, handleSelected }) => {
   const [show, setShow] = useState(false);
+  const { solvedPuzzles } = usePuzzle();
   
   const handleClick = () => {
     setShow(true);
@@ -20,9 +22,11 @@ const Photo = ({ index, photo, handleSelected }) => {
         <img src={photo.image} className="object-cover w-full h-full" alt="im"/>
       </div>
       <Board 
+        index={index}
         photo={photo.image}
         showBoard={show}
         setShowBoard={handleShow}
+        boardSolved={solvedPuzzles.includes(index)}
       />
     </>
   );

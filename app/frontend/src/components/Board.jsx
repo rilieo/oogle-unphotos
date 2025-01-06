@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { TILE_COUNT } from '../../constants';
 import Tile from './Tile';
 import { back } from '../assets';
+import { usePuzzle } from '../context/PuzzleContext';
 
-const Board = ({ photo, showBoard, setShowBoard }) => {
+const Board = ({ index, photo, showBoard, setShowBoard, boardSolved }) => {
   const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
   const [shuffle, setShuffle] = useState(true);
   const [clickedTiles, setClickedTiles] = useState([]);
-  const [solved, setSolved] = useState(false);
+  const [solved, setSolved] = useState(boardSolved);
+  const { solvedPuzzles, setSolvedPuzzles } = usePuzzle();
 
   useEffect(() => {
     if (shuffle) {
@@ -43,6 +45,13 @@ const Board = ({ photo, showBoard, setShowBoard }) => {
 
     if (isSolved(swappedTiles)) {
       setSolved(true);
+      setSolvedPuzzles((prev) => [...prev, index]);
+
+      if (localStorage.getItem('solvedPuzzles') === null) {
+        localStorage.setItem('solvedPuzzles', JSON.stringify([index]));
+      } else {
+        localStorage.setItem('solvedPuzzles', JSON.stringify(solvedPuzzles));
+      }
     }
 
     setClickedTiles([]);
