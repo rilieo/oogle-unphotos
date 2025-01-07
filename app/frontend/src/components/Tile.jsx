@@ -1,4 +1,4 @@
-import { GRID_SIZE, BOARD_SIZE } from '../../constants';
+import { GRID_SIZE, BOARD_SIZE } from '../../constants/constants';
 
 const Tile = ({ index, img, handleClick, highlight }) => {
   const tileWidth = BOARD_SIZE / GRID_SIZE;
@@ -14,12 +14,8 @@ const Tile = ({ index, img, handleClick, highlight }) => {
     border: highlight ? '2px solid #3b82f6' : '1px solid black'
   };
 
-  const handleTileClick = () => {
-    handleClick(index);
-  };
-
   return (
-    <li style={tileStyle} onClick={handleTileClick}></li>
+    <li style={tileStyle} onClick={() => handleClick(index)}></li>
   );
 };
 

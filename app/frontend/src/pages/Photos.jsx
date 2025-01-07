@@ -4,8 +4,9 @@ import Photo from '../components/Photo';
 import Upload from '../components/Upload';
 import { useAuth } from '../context/AuthContext';
 import { fetchData } from '../../lib/db.js';
-import { photosRoute } from '../../constants';
+import { photosRoute } from '../../constants/constants';
 import { upload } from '../assets';
+import CustomButton from '../components/CustomButton.jsx';
 
 const Photos = () => {
   const [show, setShow] = useState(false);
@@ -25,10 +26,6 @@ const Photos = () => {
     fetchPhotos();
   }, []);
 
-  const showUpload = () => {
-    setShow(prev => !prev);
-  };
-
   const handleUpload = () => {
     fetchPhotos();
   };
@@ -43,27 +40,40 @@ const Photos = () => {
   };
 
   const photoComponents = selected !== null ? (
-    <Photo key={selected} index={selected} photo={photos[selected]} handleSelected={handleSelected} show={true} />
+    <Photo 
+      key={selected} 
+      index={selected} 
+      photo={photos[selected]} 
+      handleSelected={handleSelected} 
+      show={true} 
+    />
   ) : (
     photos && photos.map((photo, index) => (
-      <Photo key={index} index={index} photo={photo} handleSelected={handleSelected} />
+      <Photo 
+        key={index} 
+        index={index} 
+        photo={photo} 
+        handleSelected={(handleSelected)} 
+      />
     ))
   );
 
   return (
     <>
-      <nav className="flex justify-between items-center h-[50px]">
+      <div className="flex justify-between items-center h-[50px] z-1">
         <Link to="/" className="font-bold text-3xl">Oogle Unphotos</Link>
-        <Upload user={user} show={show} setShow={setShow} refetch={handleUpload}/>
-        <div className="flex justify-center items-center space-x-5 font-bold">
-          <button onClick={showUpload}>
+        <div className="flex items-center space-x-5">
+          <button onClick={() => setShow(true)}>
             <img src={upload} alt="upload icon" />
           </button>
-          <button className="border mr-2 py-2 w-[80px] rounded bg-primary hover:bg-blue-600 text-white hover:cursor-pointer" onClick={logout}>
-            <Link to="/">Log out</Link>
-          </button> 
+          <CustomButton 
+            path="/"
+            text="Logout"
+            handleClick={logout}
+          />
         </div>
-      </nav>
+      </div>
+      <Upload user={user} show={show} setShow={setShow} refetch={handleUpload}/>
       <div className={`flex ${selected !== null ? 'justify-center min-h-[70vh]': 'flex-wrap justify-start items-center gap-10'} mt-10`}>
         { photoComponents }
       </div>

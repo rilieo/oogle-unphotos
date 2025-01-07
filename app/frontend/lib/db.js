@@ -1,4 +1,4 @@
-import { API } from "../constants";
+import { API } from "../constants/constants";
 
 export const fetchData = async (route, searchParams) => {
   try {
@@ -12,7 +12,7 @@ export const fetchData = async (route, searchParams) => {
     }
     else if (data.length === 0) {
       alert('No data found');
-      console.log( 'No data found');
+      console.log('No data found');
       return [];
     }
 

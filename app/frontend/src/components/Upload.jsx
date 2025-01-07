@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { uploadRoute } from '../../constants';
+import { uploadRoute } from '../../constants/constants';
 import { postData } from '../../lib/db.js';
 
 const Upload = ({ user, show, setShow, refetch }) => {
@@ -19,10 +19,6 @@ const Upload = ({ user, show, setShow, refetch }) => {
           reject(error);
       };
     });
-  };
-
-  const handleShow = () => {
-    setShow(false);
   };
 
   const handleSubmit = async (e) => {
@@ -55,12 +51,10 @@ const Upload = ({ user, show, setShow, refetch }) => {
 
   return (
     <div className={`${show ? 'block' : 'hidden'} absolute top-0 right-0 z-5 bg-white`}>
-      <button className="absolute right-5 text-xl font-bold" onClick={handleShow}>x</button>
+      <button className="absolute right-5 text-xl font-bold" onClick={() => setShow(false)}>x</button>
       <form className="flex flex-col shadow-md p-5" onSubmit={handleSubmit}>
-        <input type="file" accept=".jpg, .jpeg, .png" ref={inputRef} onChange={(e) => handleUpload(e)} className="hover:cursor-pointer"/>
-        <br/>
-        <p className={`${uploading ? 'block' : 'hidden'} text-md`}>Uploading...</p>
-        <br/>
+        <input type="file" accept=".jpg, .jpeg, .png" ref={inputRef} onChange={(e) => handleUpload(e)} className="hover:cursor-pointer mb-8"/>
+        <p className={`${uploading ? 'block' : 'hidden'} text-md mb-8`}>Uploading...</p>
         <input type="submit" value="Upload" className="text-white text-lg bg-primary h-[50px] hover:cursor-pointer"/>
       </form>
     </div>
