@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signupRoute } from '../../constants/constants';
 import { postData } from '../../lib/db.js';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
 	const [userInfo, setUserInfo] = useState({
@@ -15,17 +16,19 @@ const Signup = () => {
 		e.preventDefault();
 
 		if (!userInfo.username || !userInfo.password) {
-			alert('Please fill out all fields');
+			toast.error('Please fill out all fields');
 			return;
 		}
 		
-		const data = await postData(signupRoute, userInfo);
+    const data = await postData(signupRoute, userInfo);
 
-		if (data.length === 0) return;
-
-		setUser(data);
-		localStorage.setItem('user', JSON.stringify(data));
-		alert('Sign up successful');
+    if (data.error) {
+      toast.error(data.error);
+      return;
+    }
+    
+	setUser(data);
+	localStorage.setItem('user', JSON.stringify(data));
 	};
 
   return (

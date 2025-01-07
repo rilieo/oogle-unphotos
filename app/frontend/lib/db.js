@@ -6,21 +6,18 @@ export const fetchData = async (route, searchParams) => {
     const data = await response.json();
     
     if (data.message) {
-      alert(data.message);
       console.log(data.message);
-      return [];
+      return { error: data.message };
     }
     else if (data.length === 0) {
-      alert('No data found');
       console.log('No data found');
-      return [];
+      return { error: 'No data found' };
     }
 
     return data;
   } catch (error) {
-    alert(error);
     console.log(error);
-    return [];
+    return { error: error };
   }
 };
 
@@ -37,20 +34,17 @@ export const postData = async (route, data) => {
     const responseData = await response.json();
     
     if (responseData.message) {
-      alert(responseData.message);
       console.log(responseData.message);
-      return [];
+      return { error: responseData.message };
     }
     else if (responseData.length === 0) {
-      alert('No data found');
       console.log('No data found');
-      return [];
+      return { error: 'No data found' };
     }
 
     return responseData;
   } catch(error) {
-    alert(error);
     console.log(error);
-    return [];
+    return { error: error };
   }
 };

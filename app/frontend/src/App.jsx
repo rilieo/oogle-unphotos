@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Photos from './pages/Photos';
 import Signup from './pages/Signup';
 import { useAuth } from './context/AuthContext';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const { user } = useAuth();
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/login" element={user ? <Navigate to="/photos" /> : <Login />}></Route>
         <Route path="/signup" element={user ? <Navigate to="/photos"/> : <Signup />}></Route>
       </Routes>
+      <Toaster />
     </div>
   );
 };

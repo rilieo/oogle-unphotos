@@ -7,6 +7,7 @@ import { fetchData } from '../../lib/db.js';
 import { photosRoute } from '../../constants/constants';
 import { upload } from '../assets';
 import CustomButton from '../components/CustomButton.jsx';
+import toast from 'react-hot-toast';
 
 const Photos = () => {
   const [show, setShow] = useState(false);
@@ -17,7 +18,10 @@ const Photos = () => {
   const fetchPhotos = async () => {
     const data = await fetchData(photosRoute, `user=${user.username}`);
   
-    if (data.length === 0) return;
+    if (data.error) {
+      toast.error(data.error);
+      return;
+    }
   
     setPhotos(data.photos);
   };
@@ -68,7 +72,7 @@ const Photos = () => {
           </button>
           <CustomButton 
             path="/"
-            text="Logout"
+            text="Log out"
             handleClick={logout}
           />
         </div>
