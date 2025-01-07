@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom';
+import CustomButton from './CustomButton';
 
-const Navbar = () => {
+const Navbar = ({ items, containerStyles }) => {
   return (
-    <div className="flex justify-between w-full font-bold">
-      <h1 className="text-3xl">Oogle Unphotos</h1>
-      <div>
-        <button className="border mr-2 py-2 w-[80px] rounded bg-primary hover:bg-blue-600 text-white">
-          <Link to="/signup">Sign up</Link>
-        </button>
-        <button className="border py-2 w-[80px] rounded bg-primary hover:bg-blue-600 text-white">
-          <Link to="/login">Log in</Link>
-        </button>
+    <nav className="flex justify-between z-1 h-[50px] w-full">
+      <Link to="/" className="font-bold text-3xl">Oogle Unphotos</Link>
+      <div className={`flex items-center ${containerStyles}`}>
+        {items.map((item, index) => (
+          <CustomButton key={index} path={item.path} text={item.text} />
+        ))}
       </div>
-    </div>
+    </nav>
   );
 };
 
