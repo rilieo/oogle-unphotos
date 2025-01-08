@@ -1,4 +1,4 @@
-import { GRID_SIZE, BOARD_SIZE } from '../../constants/constants';
+import { GRID_SIZE, BOARD_SIZE } from '../constants/constants';
 
 const Tile = ({ index, img, handleClick, highlight }) => {
   const tileWidth = BOARD_SIZE / GRID_SIZE;

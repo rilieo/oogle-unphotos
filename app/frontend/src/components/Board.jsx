@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TILE_COUNT } from '../../constants/constants';
+import { TILE_COUNT } from '../constants/constants';
 import Tile from './Tile';
 import { back } from '../assets';
 import { usePuzzle } from '../context/PuzzleContext';

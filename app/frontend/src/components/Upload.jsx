@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import { uploadRoute } from '../../constants/constants';
-import { postData } from '../../lib/db.js';
+import { uploadRoute } from '../constants/constants';
+import { postData } from '../lib/db.js';
 import toast from 'react-hot-toast';
 
 const Upload = ({ user, show, setShow, refetch }) => {

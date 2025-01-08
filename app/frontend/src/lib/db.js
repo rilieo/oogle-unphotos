@@ -1,4 +1,4 @@
-import { API } from "../constants/constants";
+import { API } from '../constants/constants';
 
 export const fetchData = async (route, searchParams) => {
   try {
