@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Photo from '../components/Photo';
 import Upload from '../components/Upload';
@@ -15,7 +15,7 @@ const Photos = () => {
   const [selected, setSelected] = useState(null);
   const { user, setUser } = useAuth();
 
-  const fetchPhotos = async () => {
+  const fetchPhotos = useCallback(async () => {
     const data = await fetchData(photosRoute, `user=${user.username}`);
   
     if (data.error) {
@@ -24,7 +24,7 @@ const Photos = () => {
     }
   
     setPhotos(data.photos);
-  };
+  }, [user.username]);
 
   useEffect(() => {
     fetchPhotos();
